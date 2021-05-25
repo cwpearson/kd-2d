@@ -5,9 +5,12 @@
 #include <algorithm>
 #include <vector>
 
-class KD {
 
+class KD {
+public:
     struct Point {
+        Point() = default;
+        Point(int _i, int _j) : i(_i), j(_j) {}
         int i;
         int j;
         static bool by_ij(const Point &a, const Point &b) {
@@ -32,6 +35,7 @@ class KD {
 
     };
 
+private:
     struct Node {
         Point location;
         Node *left;
@@ -110,14 +114,8 @@ class KD {
     }
 
 public:
-    KD(std::vector<Entry> pointlist) {
-        std::vector<Point> ps;
-        for (size_t i = 0; i < pointlist.size(); ++i) {
-            Point p;
-            p.i = pointlist[i].i;
-            p.j = pointlist[i].j;
-            ps.push_back(p);
-        }
+    KD(const std::vector<Point> &pointlist) {
+        std::vector<Point> ps = pointlist; // ctor uses this as scratch space
         root_ = helper(&ps[0], &ps[ps.size()], 0);
     }
     ~KD() {
