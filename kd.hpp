@@ -1,3 +1,5 @@
+// Copyright (c) 2021 Carl Pearson
+
 #pragma once
 
 #include <algorithm>
